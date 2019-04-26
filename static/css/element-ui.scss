@@ -1,0 +1,47 @@
+// 输入框样式
+.el-input__inner {
+  border-radius: 0px;
+}
+// 按钮样式
+.el-button {
+  border-radius: 0px;
+}
+
+// 菜单栏
+.el-menu-item {
+  padding: 0;
+  a {
+    display: inline-block;
+    padding: 0 20px;
+    text-align: center;
+  }
+}
+
+// 菜单栏下拉框
+.el-menu--horizontal:has(.el-menu--popup) {
+  left: 952px;
+}
+.el-menu--popup {
+  min-width: 120px;
+}
+
+.el-submenu__title {
+  border: none !important;
+  background:rgba(85, 141, 197, .6) !important;
+}
+
+.el-menu--horizontal>.el-menu-item.is-active {
+  border-bottom-color: #fff !important;
+  background: rgb(67, 74, 80) !important;
+}
+
+.el-submenu__title i {
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px !important;
+}
+
+// 按钮
+.el-radio-button__inner {
+  border-radius: 0px !important;
+}
