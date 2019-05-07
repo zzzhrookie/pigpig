@@ -43,7 +43,7 @@ const articleSchema = new mongoose.Schema({
   gist: String, // 主旨
   created: {
     type: String,
-    default: Date.now
+    // default: Date.now
   },
   content: String, // 内容
   comments: Array // 评论

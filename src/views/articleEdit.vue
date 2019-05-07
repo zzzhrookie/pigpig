@@ -9,7 +9,7 @@
       </div> -->
       <el-form label-position="left" label-width="80px" :model="artEditForm">
         <el-form-item label="标题">
-          <el-input clearable v-model="artEditForm.heading" placeholder="请输入标题"></el-input>
+          <el-input clearable v-model="artEditForm.title" placeholder="请输入标题"></el-input>
         </el-form-item>
         <el-form-item label="分类">
           <el-checkbox-group
@@ -32,12 +32,15 @@
           </el-input>
         </el-form-item>
       </el-form>
+      <div class="btn">
+        <el-button type="primary" size="medium" @click="submit">保存</el-button>
+      </div>
     </el-col>
     <el-col :span="14" :offset="1">
        <div class="content">
       <!-- markdown编辑器 -->
       <div class="markdown" v-if="editStyle === 'markdown'">
-        <mavon-editor v-model="markdownContent" />
+        <mavon-editor v-model="artEditForm.content" />
       </div>
       <!-- 富文本编辑器 -->
     </div>
@@ -46,6 +49,7 @@
 </template>
 
 <script>
+import { transDate } from '@/tool/auth'
 export default {
   name: 'adminEdit',
   data () {
@@ -56,17 +60,23 @@ export default {
       category: '',
       brief: '',
       tinyContent: '',
-      markdownContent: '',
       artEditForm: {
-        heading: '',
+        title: '',
         category: [],
-        brief: ''
+        brief: '',
+        content: ''
       }
     }
   },
   watch: {
     editStyle (newVal, oldVal) {
       console.log(newVal)
+    }
+  },
+  methods: {
+    submit () {
+      transDate()
+      console.log(this.artEditForm)
     }
   }
 }
@@ -84,6 +94,10 @@ export default {
     margin-top: 40px;
     // width: 600px;
     text-align: left;
+  }
+  .btn {
+    margin-top: 70px;
+    padding-left: 180px;
   }
   .content {
     margin-top: 40px;

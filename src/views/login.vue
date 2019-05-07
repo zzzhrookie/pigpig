@@ -36,6 +36,12 @@ export default {
       }
     }
   },
+  beforeCreate () {
+    document.querySelector('body').classList.add('loginBg')
+  },
+  beforeDestroy () {
+    document.querySelector('body').classList.remove('loginBg')
+  },
   methods: {
     // 切换注册和登录
     change () {
@@ -50,12 +56,13 @@ export default {
             type: 'success',
             message: '登录成功'
           })
+          console.log(res.data)
+          // this.$store.commit('LoginByUsername', res.data)
           localStorage.setItem('token', res.data.token)
           localStorage.setItem('username', res.data.username)
           localStorage.setItem('nickname', res.data.nickname)
           localStorage.setItem('avatar', res.data.avatar)
           this.$router.push('/')
-          console.log(res.data)
         } else {
           this.$message({
             type: 'warning',
@@ -127,8 +134,6 @@ export default {
   height: 100%;
   margin: auto;
   padding-top: 240px;
-  background-image: url('../assets/image/bg.jpg');
-  background-size: cover;
 }
 .el-form {
   width: 400px;

@@ -10,14 +10,15 @@ import articleEdit from '@/views/articleEdit' // 写文章页
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-      path: '',
+      path: '/',
       redirect: '/article',
       component: commonLayout,
       children: [
         {
-          path: '/article',
+          path: '',
           name: 'article',
           component: article
         },

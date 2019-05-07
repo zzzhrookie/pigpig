@@ -43,12 +43,16 @@
             </el-col>
           </div>
         </el-main>
+        <el-footer>
+          <el-button type="primary" size="small"  @click="loginOut">退出</el-button>
+        </el-footer>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getToken } from '@/tool/auth'
 import svgIcon from '@/components/svgIcon'
 import defaultImg from '@/assets/image/龙猫.jpg'
 export default {
@@ -57,13 +61,34 @@ export default {
   },
   data () {
     return {
+      token: getToken(),
       defaultImg,
       username: '小猪小窝',
-      profile: ''
+      profile: '',
+      form: {
+        token: getToken()
+      }
     }
   },
   methods: {
-    uploadChange () {}
+    uploadChange () {},
+    loginOut () {
+      this.$axios.post('/api/user/logout', this.form).then(res => {
+        if (res.data.status === 1) {
+          localStorage.clear()
+          this.$message({
+            type: 'success',
+            message: '退出成功'
+          })
+          this.$router.push('/')
+        } else {
+          this.$message({
+            type: 'warning',
+            message: '退出失败: ' + res.msg
+          })
+        }
+      })
+    }
   }
 }
 </script>

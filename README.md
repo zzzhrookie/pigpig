@@ -18,8 +18,6 @@ npm run build
 npm run build --report
 ```
 
-
-
 > 适合当阅读背景的颜色
 ```markdown
 * 河白色 #FFFFFF rgb(255, 255, 255)  

@@ -84,7 +84,7 @@ router.post('/api/user/logout', (req, res) => {
     }).then(() => {
       res.send({ status: 1, msg: '退出成功'})
     }).catch(err => {
-      res.send({ status: 0, msg: '退出失败: ' + err })
+      res.send({ status: 0, msg: '退出失败: ' + err, zui: req.body.token })
     })
 })
 
@@ -113,6 +113,23 @@ router.post('/api/articleList', (req, res) => {
       res.send({ status: 0, msg: '文章获取失败: ' + err })
     })
 })
+
+// 添加文章页
+router.post('/api/saveArticle', (req, res) => {
+  let newArticle = new db.Article(req.body.articleInfo)
+  newArticle.save((err) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.send({ status: 1, msg: '保存成功' })
+    }
+  })
+})
+
+// 修改文章页
+// router.post('/api/updateAeticle', (req, res) => {
+//   let 
+// })
 
 
 

@@ -9,7 +9,8 @@ import '../static/css/element-ui.scss'
 import '../static/css/common.scss'
 import App from './App'
 import router from './router'
-import store from './store/store'
+import store from './store'
+import './permission'
 
 Vue.use(Element)
 Vue.use(mavonEditor)

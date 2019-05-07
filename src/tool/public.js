@@ -1,7 +1,7 @@
 export const checkToken = {
   data () {
     return {
-      isSignIn: false
+      // isSignIn: false
     }
   }
   // beforeCreate () {

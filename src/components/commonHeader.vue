@@ -6,17 +6,17 @@
         <div class="zoneTitle">XXXX</div>
       </el-col>
       <!-- 右边导航栏 -->
-      <el-col :span="6" :offset="12">
+      <el-col :span="12" :offset="6">
         <el-menu
-          :default-active="$route.path"
+          :default-active="activeIndex"
           class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
           background-color="#2d2d2d"
           text-color="#fff"
           active-text-color="#ffd04b">
-            <el-menu-item index="/article">
-              <router-link to="/article">
+            <el-menu-item index="/">
+              <router-link to="/">
                 <svg-icon icon-class="yuedu" class-name="svgStyle"></svg-icon>
                 文章
               </router-link>
@@ -27,24 +27,29 @@
                 分类
               </router-link>
             </el-menu-item>
-            <el-submenu index="3">
+            <el-menu-item index="/admin/articleEdit">
+              <router-link to="/admin/articleEdit" class="routerLink">
+                <svg-icon icon-class="xiezuoye1" class-name="svgStyle"></svg-icon>
+                写作
+              </router-link>
+            </el-menu-item>
+            <el-menu-item index="/login">
+              <router-link to="/login" v-if="!isSignIn">Sign In</router-link>
+              <router-link to="/settings" v-if="isSignIn">{{ username }}</router-link>
+            </el-menu-item>
+            <!-- <el-submenu index="3">
               <template slot="title">
                 <span class="avatar"><img :src="defaultImg" alt=""></span>
+                <span class="avatar">{{ nickname }}</span>
               </template>
-              <el-menu-item index="/admin/articleEdit">
-                <router-link to="/admin/articleEdit" v-if="!isSignIn" class="routerLink">
-                  <svg-icon icon-class="xiezuoye1" class-name="svgStyle"></svg-icon>
-                  写作
-                </router-link>
-              </el-menu-item>
               <el-menu-item index="/settings">
-                <router-link to="/settings" v-if="!isSignIn" class="routerLink">
+                <router-link to="/settings" class="routerLink">
                   <svg-icon icon-class="shezhi1" class-name="svgStyle"></svg-icon>
                   设置
                 </router-link>
               </el-menu-item>
-              <!-- <router-link to="/login" v-if="!isSignIn">Sign In</router-link> -->
-            </el-submenu>
+              <router-link to="/login" v-if="!isSignIn">Sign In</router-link>
+            </el-submenu> -->
         </el-menu>
       </el-col>
     </el-row>
@@ -62,7 +67,8 @@ export default {
   },
   data () {
     return {
-      defaultImg
+      defaultImg,
+      nickname: 'zhang'
       // activeIndex: '1'
     }
   },
@@ -73,16 +79,22 @@ export default {
     signIn () {
       this.$router.push('/login')
     }
+  },
+  computed: {
+    // avatar () {
+    //   return localStorage.getItem('avatar')
+    // }
+    activeIndex () {
+      console.log(this.$route.path)
+      return this.$route.path
+    },
+    isSignIn () {
+      return this.$store.getters.isSignIn
+    },
+    username () {
+      return this.$store.getters.username
+    }
   }
-  // computed: {
-  //   // avatar () {
-  //   //   return localStorage.getItem('avatar')
-  //   // }
-  //   // activeIndex () {
-  //   //   console.log(this.$store.activeIndex)
-  //   //   return this.$store.activeIndex
-  //   //}
-  // }
 }
 </script>
 
@@ -105,12 +117,15 @@ export default {
     margin-right: 70px;
   }
   .avatar  {
-    width:  40px;
-    height: 40px;
-    border-radius: 50%;
-    img {
-      @extend .avatar;
-    }
+    font-family: "PingFang SC";
+    font-weight: 700;
+    font-size: 14px;
+    // width:  40px;
+    // height: 40px;
+    // border-radius: 50%;
+    // img {
+    //   @extend .avatar;
+    // }
   }
   .el-menu {
     &.el-menu--horizontal {

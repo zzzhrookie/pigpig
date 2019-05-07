@@ -15,6 +15,9 @@
     padding: 0 20px;
     text-align: center;
   }
+  &:last-child {
+    background: #242455 !important;
+  }
 }
 
 // 菜单栏下拉框
@@ -25,21 +28,28 @@
   min-width: 120px;
 }
 
-.el-submenu__title {
-  border: none !important;
-  background:rgba(85, 141, 197, .6) !important;
-}
+// .el-submenu__title {
+//   border: none !important;
+//   background:rgba(85, 141, 197, .6) !important;
+//   i {
+//     color: #fff;
+//     font-weight: 700;
+//     font-size: 14px;
+//   }
+//   &:last-child {
+//     padding: 0 5px;
+//     i {
+//       font-size: 12px;
+//     }
+//   }
+// }
 
 .el-menu--horizontal>.el-menu-item.is-active {
   border-bottom-color: #fff !important;
   background: rgb(67, 74, 80) !important;
 }
 
-.el-submenu__title i {
-  color: #fff;
-  font-weight: 700;
-  font-size: 14px !important;
-}
+.el-submenu__title 
 
 // 按钮
 .el-radio-button__inner {
