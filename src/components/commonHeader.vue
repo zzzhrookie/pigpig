@@ -35,7 +35,7 @@
             </el-menu-item>
             <el-menu-item index="/login">
               <router-link to="/login" v-if="!isSignIn">Sign In</router-link>
-              <router-link to="/settings" v-if="isSignIn">{{ username }}</router-link>
+              <router-link to="/" v-if="isSignIn">{{ username }}</router-link>
             </el-menu-item>
             <!-- <el-submenu index="3">
               <template slot="title">
