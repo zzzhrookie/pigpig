@@ -13,6 +13,6 @@ app.use('/static/', express.static(path.join(__dirname, '../src/assets')))
 app.use(express.static(path.resolve(__dirname, '../rightWay/dist')))
 
 //监听8088端口
-app.listen(8088, function() {
-  console.log('sucess listen........')
+app.listen(8088, function () {
+	console.log('sucess listen........')
 })
