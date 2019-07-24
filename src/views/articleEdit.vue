@@ -6,30 +6,20 @@
           <el-radio-button label="markdown"></el-radio-button>
           <el-radio-button label="富文本编辑器"></el-radio-button>
         </el-radio-group>
-      </div> -->
+      </div>-->
       <el-form label-position="left" label-width="80px" :model="artEditForm">
         <el-form-item label="标题">
           <el-input clearable v-model="artEditForm.title" placeholder="请输入标题"></el-input>
         </el-form-item>
         <el-form-item label="分类">
-          <el-checkbox-group
-            v-model="artEditForm.category">
-           <template v-for="category in categorys">
-              <el-checkbox
-              :label="category"
-              :key="category">
-              {{ category }}
-            </el-checkbox>
-           </template>
+          <el-checkbox-group v-model="artEditForm.category">
+            <template v-for="category in categorys">
+              <el-checkbox :label="category" :key="category">{{ category }}</el-checkbox>
+            </template>
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="简介">
-          <el-input
-            type="textarea"
-            :rows="5"
-            placeholder="请输入简介"
-            v-model="artEditForm.brief">
-          </el-input>
+          <el-input type="textarea" :rows="5" placeholder="请输入简介" v-model="artEditForm.gist"></el-input>
         </el-form-item>
       </el-form>
       <div class="btn">
@@ -37,13 +27,13 @@
       </div>
     </el-col>
     <el-col :span="14" :offset="1">
-       <div class="content">
-      <!-- markdown编辑器 -->
-      <div class="markdown" v-if="editStyle === 'markdown'">
-        <mavon-editor v-model="artEditForm.content" />
+      <div class="content">
+        <!-- markdown编辑器 -->
+        <div class="markdown" v-if="editStyle === 'markdown'">
+          <mavon-editor v-model="artEditForm.content" />
+        </div>
+        <!-- 富文本编辑器 -->
       </div>
-      <!-- 富文本编辑器 -->
-    </div>
     </el-col>
   </div>
 </template>
@@ -52,31 +42,36 @@
 import { transDate } from '@/tool/auth'
 export default {
   name: 'adminEdit',
-  data () {
+  data() {
     return {
-      categorys: ['心情', '随笔', '吐槽'],
-      editStyle: 'markdown',
-      heading: '',
-      category: '',
-      brief: '',
-      tinyContent: '',
-      artEditForm: {
-        title: '',
-        category: [],
-        brief: '',
-        content: ''
-      }
+        categorys: ['心情', '随笔', '吐槽'],
+        editStyle: 'markdown',
+        heading: '',
+        category: '',
+        gist: '',
+        tinyContent: '',
+        artEditForm: {
+            title: '',
+            category: [],
+            gist: '',
+            content: ''
+        }
     }
   },
   watch: {
-    editStyle (newVal, oldVal) {
-      console.log(newVal)
+    editStyle(newVal, oldVal) {
+        console.log(newVal)
     }
   },
   methods: {
-    submit () {
-      transDate()
-      console.log(this.artEditForm)
+    async submit() {
+        transDate()
+        console.log(this.artEditForm)
+        let result = await this.addArtcile()
+        console.log(result)
+    },
+    addArtcile() {
+        return this.$axios.post('/api/saveArticle', this.artEditForm)
     }
   }
 }

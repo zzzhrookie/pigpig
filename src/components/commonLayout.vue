@@ -1,6 +1,6 @@
 <template>
   <div class="commonLayout">
-    <common-header></common-header>
+    <!-- <common-header></common-header> -->
     <transition name="fade-transform" mode="out-in">
       <router-view></router-view>
     </transition>
