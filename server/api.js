@@ -183,12 +183,15 @@ router.post('/api/deleteArticle', (req, res) => {
 })
 
 // 文章详情页
-router.post('/api/articleDetail/:id', (err, docs) => {
-	if (err) {
-		res.send({status: 0, msg: '查看失败' + err })
-		return
-	} 
-	res.send({ status: 1, msg: '查询成功', result: docs })
+router.get('/api/articleDetail/:id', (req, res) => {
+    console.log(req.params)
+    db.Article.findOne({ _id: req.params.id }, (err, docs) => {
+        if (err) {
+            res.send({status: 0, msg: '查看失败' + err })
+            return
+        } 
+        res.send({ status: 1, msg: '查询成功', result: docs })
+    })
 })
 
 
